@@ -1,0 +1,8 @@
+# ros_gz_bridge 主题映射：把 Gazebo 的 /lidar 桥到 ROS 的 /scan
+# 用法：launch 里用 Node(package='ros_gz_bridge', executable='parameter_bridge',
+#        parameters=[{'config_file': <这个文件的安装路径>}])
+- ros_topic_name: "/scan"
+  gz_topic_name: "/lidar"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS

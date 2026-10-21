@@ -1,0 +1,11 @@
+id: diag-002
+category: 故障诊断
+layer: L3
+knowledge: [domains/KB_diagnostics.md, faults/F-0002-ping-self-ip-conflict.md]
+prompt: |
+  ping 雷达的 IP 是通的，ttl=64，延迟 0.05 ms，但雷达驱动收不到任何数据。怎么解释？
+must_include:
+  - [自己, 本机, IP 冲突, IP冲突, 抢占]
+  - [ttl=255, ttl 255, TTL=255, ttl为255]
+must_not: []
+rubric: 判断回应来自本机而非雷达（IP 冲突），并给出 ttl=255 才是雷达本体的判据。

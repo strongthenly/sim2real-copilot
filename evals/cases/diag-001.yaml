@@ -1,0 +1,11 @@
+id: diag-001
+category: 故障诊断
+layer: L3
+knowledge: [domains/KB_diagnostics.md, faults/F-0001-topic-hz-but-empty.md]
+prompt: |
+  雷达话题 rostopic hz 显示 369 Hz，看起来很正常，但 FAST-LIVO2 一直收不到点云。下一步该查什么？
+must_include:            # 每一组至少命中一个关键词
+  - [空消息, pts=0, pts = 0, 点数为0, 点数为 0, 空的]
+  - [取一帧, echo -n1, echo -n 1, 看内容, 看一帧]
+must_not: []
+rubric: 指出 hz 不能证明数据有效，要求查看单帧内容（点数）；不应直接把问题归到下游算法。

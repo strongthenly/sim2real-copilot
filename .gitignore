@@ -1,0 +1,15 @@
+# secrets & local mappings
+.env
+*.local.json
+*.local.*
+# raw trajectories may contain secrets
+trajectories/raw/
+# held-out eval set must not be public
+evals/heldout/
+# python
+__pycache__/
+*.pyc
+.venv/
+# OS
+.DS_Store
+Thumbs.db

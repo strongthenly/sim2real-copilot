@@ -1,0 +1,11 @@
+id: sim2real-001
+category: sim-to-real
+layer: L1/L7
+knowledge: [gap-ledger/GAP-0002-no-rc-in-sim.md]
+prompt: |
+  仿真里 SUPER 已经规划出轨迹了，RViz 能看到，但飞机就是悬停不动。实机上同样流程是正常的。
+must_include:
+  - [遥控, CH10, 拨杆]
+  - [auto_arm, auto_offboard]
+must_not: []
+rubric: 指出仿真没有遥控器触发，需开启 auto_arm 与 auto_offboard；加分项：提醒这两项不能带入实机配置。

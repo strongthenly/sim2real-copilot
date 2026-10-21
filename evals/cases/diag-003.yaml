@@ -1,0 +1,11 @@
+id: diag-003
+category: 故障诊断
+layer: L2
+knowledge: [domains/KB_slam-mapping.md, faults/F-0003-pcd-not-saved-sigterm.md]
+prompt: |
+  我用 kill 命令停止了 FAST-LIVO2 节点，发现 PCD 文件没有保存。pcd_save_en 是开着的。为什么？
+must_include:
+  - [SIGINT, Ctrl+C, Ctrl-C]
+  - [SIGTERM, kill -TERM, -15]
+must_not: []
+rubric: 指出 roscpp 只响应 SIGINT、kill 默认 SIGTERM 导致 savePCD 不执行。

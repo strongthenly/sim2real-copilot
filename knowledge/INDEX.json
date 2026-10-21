@@ -1,0 +1,424 @@
+{
+ "generated": "2026-10-21",
+ "handbook": "00_handbook.md",
+ "domains": {
+  "control-stack": {
+   "title": "规划与自主飞行（SUPER / 复飞 / 避障 / 目标仲裁）",
+   "file": "domains/KB_control-stack.md",
+   "chars": 274231,
+   "why": "飞机飞哪里、怎么绕障、怎么复飞、多个模块抢目标时谁说了算——这一层出问题的后果最直接（撞、悬停、原地徘徊）。",
+   "members": [
+    "uav-super-navigation",
+    "uav-trajectory-replay",
+    "uav-super-flight-replay",
+    "super-planner-replay"
+   ]
+  },
+  "slam-mapping": {
+   "title": "定位与建图（FAST-LIVO2 / odin / PCD 生命周期）",
+   "file": "domains/KB_slam-mapping.md",
+   "chars": 30458,
+   "why": "FAST-LIVO2 是唯一定位源：它一断，飞机立刻失去定点能力。PCD 保存机制与\"飞行配置 vs 建图配置\"直接绑定飞行安全。",
+   "members": [
+    "uav-ros-mapping-lifecycle",
+    "fast-livo2-mapping",
+    "odin-ros-driver-diagnostics"
+   ]
+  },
+  "diagnostics": {
+   "title": "机载诊断（飞控 / 雷达 / 图传 / Windows 远程接入）",
+   "file": "domains/KB_diagnostics.md",
+   "chars": 50315,
+   "why": "故障时绝大多数时间花在\"判断哪一层坏了\"。这一层给的是分层判据、防误判事实，以及从 Windows 远程操作的确定做法。",
+   "members": [
+    "uav-ros-diagnostics",
+    "uav-drone-diagnostics",
+    "uav-ros-sensor-diagnostics",
+    "livox-lidar-diagnostics"
+   ]
+  },
+  "pointcloud-tools": {
+   "title": "点云工具链（bag → PCD / LAS / 深度图 / 稠密地图）",
+   "file": "domains/KB_pointcloud-tools.md",
+   "chars": 34532,
+   "why": "不下飞机、不装 ROS 就能把数据取出来：这是判读建图质量、做真值、给仿真建世界的前提。",
+   "members": [
+    "rosbag-pointcloud-extraction",
+    "ros-bag-pointcloud-conversion",
+    "ros1-bag-pointcloud-processing",
+    "ros1-bag-data-extraction",
+    "ros1-bag-pointcloud",
+    "rosbag-data-extraction",
+    "rosbag-pointcloud-processing",
+    "bag-pointcloud-processing"
+   ]
+  },
+  "pcd-quality": {
+   "title": "点云质量评估（建图验收的尺子）",
+   "file": "domains/KB_pcd-quality.md",
+   "chars": 11386,
+   "why": "没有量化判据时\"看着还行\"会把飞点、重影、分层当成正常，后续所有结论都建在坏数据上。",
+   "members": [
+    "pointcloud-quality-assessment",
+    "pointcloud-quality-analysis",
+    "pcd-quality-analysis",
+    "point-cloud-quality-assessment"
+   ]
+  },
+  "auto-exploration": {
+   "title": "自主探索与仿真平台（ROS1 双胞胎 / WSL ROS2 / PX4 SITL）",
+   "file": "domains/KB_auto-exploration.md",
+   "chars": 51961,
+   "why": "探索算法是论文的主战场；这一层记录平台选型结论、国内网络下的安装坑，以及\"双胞胎栈\"怎么和实机对齐。",
+   "members": [
+    "uav-autonomous-exploration-sim",
+    "uav-ros2-sim-setup",
+    "wsl2-ros2-setup",
+    "ros2-gazebo-sim-setup",
+    "wsl2-ros2-sim-platform"
+   ]
+  },
+  "airsim": {
+   "title": "AirSim / UE4 可飞世界（含点云造世界、PX4 SITL 实验）",
+   "file": "domains/KB_airsim.md",
+   "chars": 64180,
+   "why": "树林场景靠真实点云做成 UE4 场景可飞可撞；这一层是构建管线与实测坑位，每个都带验证过的修法。",
+   "members": [
+    "airsim-drone-exploration",
+    "airsim-uav-simulation",
+    "pointcloud-to-ue4-airsim-world"
+   ]
+  },
+  "px4": {
+   "title": "PX4 飞控（串级 PID / ulg 日志 / 外设 / UGV）",
+   "file": "domains/KB_px4.md",
+   "chars": 33140,
+   "why": "晃、漂、高度不对、模式切不进，最后都要落到 PX4 参数与 .ulg 日志上判读；这里是判读口径与调参顺序。",
+   "members": [
+    "px4-flight-controller-tuning",
+    "px4-ulog-analysis",
+    "px4-hardware-peripherals",
+    "px4-ugv-rover"
+   ]
+  },
+  "forest": {
+   "title": "森林与树干点云（探索目标的重定义 + 评估尺子）",
+   "file": "domains/KB_forest.md",
+   "chars": 23251,
+   "why": "这是论文创新内核：探索目标从\"空间覆盖\"改为\"树干点云覆盖率\"，以及\"尺子怎么做才算数\"（真值必须独立且冻结）。",
+   "members": [
+    "pointcloud-forest-structure-extraction"
+   ]
+  },
+  "swarm": {
+   "title": "集群 / 多智能体协同控制（理论 + 可跑 demo）",
+   "file": "domains/KB_swarm.md",
+   "chars": 8554,
+   "why": "从单机探索转向集群的理论地基：七大协同问题、拓扑三矩阵、一致性控制律、落地台阶。",
+   "members": [
+    "multi-agent-cooperative-control",
+    "uav-swarm-cooperative-control"
+   ]
+  },
+  "streaming": {
+   "title": "图传与数传（RTSP / 私有协议 AUTH / MAVLink 透传）",
+   "file": "domains/KB_streaming.md",
+   "chars": 5681,
+   "why": "\"遥控器看不到画面\"最常见是私有协议与标准 RTSP 搞混；这一层是三条验证链和六个让 DESCRIBE 返回 400 的坑。",
+   "members": [
+    "uav-video-telemetry-streaming"
+   ]
+  },
+  "delivery": {
+   "title": "交付打包（防源码泄露 / 二进制新鲜度）",
+   "file": "domains/KB_delivery.md",
+   "chars": 9748,
+   "why": "对外交付只给二进制还不够——必须先验证二进制比源码新，否则交出去的是旧版本。",
+   "members": [
+    "uav-delivery-packaging"
+   ]
+  }
+ },
+ "sources": [
+  {
+   "domain": "airsim",
+   "skill": "airsim-drone-exploration",
+   "title": "AirSim + PX4 + ROS2 无人机探索仿真平台",
+   "chars": 40393,
+   "asset_files": 2
+  },
+  {
+   "domain": "airsim",
+   "skill": "airsim-uav-simulation",
+   "title": "AirSim UAV Simulation (Windows + Unreal)",
+   "chars": 18105,
+   "asset_files": 2
+  },
+  {
+   "domain": "pointcloud-tools",
+   "skill": "bag-pointcloud-processing",
+   "title": "ROS1 Bag 点云处理（Windows，无需 ROS）",
+   "chars": 5118,
+   "asset_files": 2
+  },
+  {
+   "domain": "slam-mapping",
+   "skill": "fast-livo2-mapping",
+   "title": "FAST-LIVO2 建图 PCD 保存/关闭/启动 运维",
+   "chars": 11881,
+   "asset_files": 2
+  },
+  {
+   "domain": "diagnostics",
+   "skill": "livox-lidar-diagnostics",
+   "title": "Livox LiDAR connectivity diagnostics (ROS companion computer)",
+   "chars": 6843,
+   "asset_files": 2
+  },
+  {
+   "domain": "swarm",
+   "skill": "multi-agent-cooperative-control",
+   "title": "多智能体协同控制（含 UAV 集群）",
+   "chars": 3529,
+   "asset_files": 2
+  },
+  {
+   "domain": "slam-mapping",
+   "skill": "odin-ros-driver-diagnostics",
+   "title": "odin1 ROS 驱动诊断（odin_ros_driver）",
+   "chars": 11441,
+   "asset_files": 2
+  },
+  {
+   "domain": "pcd-quality",
+   "skill": "pcd-quality-analysis",
+   "title": "PCD 点云建图质量分析",
+   "chars": 2980,
+   "asset_files": 2
+  },
+  {
+   "domain": "pcd-quality",
+   "skill": "point-cloud-quality-assessment",
+   "title": "点云建图质量评估（PCD）",
+   "chars": 2947,
+   "asset_files": 2
+  },
+  {
+   "domain": "forest",
+   "skill": "pointcloud-forest-structure-extraction",
+   "title": "点云森林结构参数提取（单木分割 + 密度估计）",
+   "chars": 23346,
+   "asset_files": 2
+  },
+  {
+   "domain": "pcd-quality",
+   "skill": "pointcloud-quality-analysis",
+   "title": "点云建图质量分析 (PCD Quality Analysis)",
+   "chars": 2434,
+   "asset_files": 2
+  },
+  {
+   "domain": "pcd-quality",
+   "skill": "pointcloud-quality-assessment",
+   "title": "点云建图质量评估",
+   "chars": 3187,
+   "asset_files": 2
+  },
+  {
+   "domain": "airsim",
+   "skill": "pointcloud-to-ue4-airsim-world",
+   "title": "点云 → UE4/AirSim 可飞世界",
+   "chars": 8625,
+   "asset_files": 2
+  },
+  {
+   "domain": "px4",
+   "skill": "px4-flight-controller-tuning",
+   "title": "PX4/ArduPilot 飞控调参（串级 PID）",
+   "chars": 5822,
+   "asset_files": 2
+  },
+  {
+   "domain": "px4",
+   "skill": "px4-hardware-peripherals",
+   "title": "PX4 硬件外设选型与官方文档检索",
+   "chars": 2176,
+   "asset_files": 2
+  },
+  {
+   "domain": "px4",
+   "skill": "px4-ugv-rover",
+   "title": "PX4 无人车（Rover / UGV）方案",
+   "chars": 4600,
+   "asset_files": 2
+  },
+  {
+   "domain": "px4",
+   "skill": "px4-ulog-analysis",
+   "title": "PX4 ULog 飞行日志分析",
+   "chars": 22277,
+   "asset_files": 2
+  },
+  {
+   "domain": "pointcloud-tools",
+   "skill": "ros-bag-pointcloud-conversion",
+   "title": "ROS1 bag → 点云（PCD/LAS/彩色地图）",
+   "chars": 4315,
+   "asset_files": 2
+  },
+  {
+   "domain": "pointcloud-tools",
+   "skill": "ros1-bag-data-extraction",
+   "title": "ROS1 bag 数据提取与转换（无需 ROS）",
+   "chars": 2891,
+   "asset_files": 2
+  },
+  {
+   "domain": "pointcloud-tools",
+   "skill": "ros1-bag-pointcloud",
+   "title": "ROS1 bag 点云处理（Windows 无需 ROS）",
+   "chars": 3455,
+   "asset_files": 2
+  },
+  {
+   "domain": "pointcloud-tools",
+   "skill": "ros1-bag-pointcloud-processing",
+   "title": "ROS1 Bag 点云提取与转换（Windows 无 ROS）",
+   "chars": 4968,
+   "asset_files": 2
+  },
+  {
+   "domain": "auto-exploration",
+   "skill": "ros2-gazebo-sim-setup",
+   "title": "ROS2 + Gazebo 无人机仿真环境搭建",
+   "chars": 5573,
+   "asset_files": 2
+  },
+  {
+   "domain": "pointcloud-tools",
+   "skill": "rosbag-data-extraction",
+   "title": "ROS1 bag 数据提取与转换",
+   "chars": 3267,
+   "asset_files": 2
+  },
+  {
+   "domain": "pointcloud-tools",
+   "skill": "rosbag-pointcloud-extraction",
+   "title": "ROS1 bag → PCD 点云提取",
+   "chars": 10525,
+   "asset_files": 2
+  },
+  {
+   "domain": "pointcloud-tools",
+   "skill": "rosbag-pointcloud-processing",
+   "title": "ROS1 bag 点云提取与转换（无需 ROS）",
+   "chars": 2818,
+   "asset_files": 2
+  },
+  {
+   "domain": "control-stack",
+   "skill": "super-planner-replay",
+   "title": "SUPER 规划器轨迹复飞系统（fouruav）",
+   "chars": 9645,
+   "asset_files": 2
+  },
+  {
+   "domain": "auto-exploration",
+   "skill": "uav-autonomous-exploration-sim",
+   "title": "UAV 自主探索研究仿真平台",
+   "chars": 23679,
+   "asset_files": 2
+  },
+  {
+   "domain": "delivery",
+   "skill": "uav-delivery-packaging",
+   "title": "UAV 交付打包（防源码泄露）",
+   "chars": 9642,
+   "asset_files": 2
+  },
+  {
+   "domain": "diagnostics",
+   "skill": "uav-drone-diagnostics",
+   "title": "UAV / Drone Sensor Diagnostics",
+   "chars": 28422,
+   "asset_files": 2
+  },
+  {
+   "domain": "diagnostics",
+   "skill": "uav-ros-diagnostics",
+   "title": "UAV ROS 系统连接诊断（飞控 + 雷达）",
+   "chars": 8877,
+   "asset_files": 2
+  },
+  {
+   "domain": "slam-mapping",
+   "skill": "uav-ros-mapping-lifecycle",
+   "title": "UAV ROS 建图生命周期运维（FAST-LIVO2 on Jetson NX）",
+   "chars": 7686,
+   "asset_files": 2
+  },
+  {
+   "domain": "diagnostics",
+   "skill": "uav-ros-sensor-diagnostics",
+   "title": "UAV ROS Sensor Diagnostics (飞控 + 雷达连接测试)",
+   "chars": 7194,
+   "asset_files": 2
+  },
+  {
+   "domain": "auto-exploration",
+   "skill": "uav-ros2-sim-setup",
+   "title": "UAV ROS2 仿真环境搭建",
+   "chars": 6249,
+   "asset_files": 2
+  },
+  {
+   "domain": "control-stack",
+   "skill": "uav-super-flight-replay",
+   "title": "SUPER 轨迹复飞系统运维（fouruav / Orin NX）",
+   "chars": 72049,
+   "asset_files": 2
+  },
+  {
+   "domain": "control-stack",
+   "skill": "uav-super-navigation",
+   "title": "UAV SUPER 规划器轨迹复飞（fouruav）",
+   "chars": 99903,
+   "asset_files": 2
+  },
+  {
+   "domain": "swarm",
+   "skill": "uav-swarm-cooperative-control",
+   "title": "UAV 集群 / 多智能体协同控制",
+   "chars": 5913,
+   "asset_files": 2
+  },
+  {
+   "domain": "control-stack",
+   "skill": "uav-trajectory-replay",
+   "title": "UAV 轨迹复飞（fouruav）验证与运维",
+   "chars": 99511,
+   "asset_files": 2
+  },
+  {
+   "domain": "streaming",
+   "skill": "uav-video-telemetry-streaming",
+   "title": "UAV 图传 + 数传 网线透传",
+   "chars": 6290,
+   "asset_files": 2
+  },
+  {
+   "domain": "auto-exploration",
+   "skill": "wsl2-ros2-setup",
+   "title": "WSL2 + ROS2 无人机仿真环境搭建（含国内网络/Clash 代理）",
+   "chars": 13050,
+   "asset_files": 2
+  },
+  {
+   "domain": "auto-exploration",
+   "skill": "wsl2-ros2-sim-platform",
+   "title": "WSL2 ROS2 Simulation Platform",
+   "chars": 5661,
+   "asset_files": 2
+  }
+ ]
+}

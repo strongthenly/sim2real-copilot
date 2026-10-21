@@ -1,0 +1,12 @@
+id: sim2real-002
+category: sim-to-real
+layer: L2
+knowledge: [gap-ledger/GAP-0003-onboard-compute-budget.md]
+prompt: |
+  我在桌面仿真里用 MID360_Fly_Lidar.yaml 跑树林场景，定位非常稳，建图也更稠密。明天实飞能直接换成这个配置吗？
+must_include:
+  - [不建议, 不能, 不要, 不可以, 不应]
+  - [算力]
+  - [MID360_Fly.yaml]
+must_not: []
+rubric: 说明桌面仿真不能复现机载算力约束，该配置在 Orin NX 树林场景会导致位姿延迟、漂移；飞行应使用 MID360_Fly.yaml。

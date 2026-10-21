@@ -1,0 +1,11 @@
+id: param-001
+category: 参数语义
+layer: L1
+knowledge: [00_handbook.md]
+prompt: |
+  我在 SUPER 的 yaml 里改了高度上限，重新启动后飞机行为完全没变。是不是参数没写对？
+must_include:
+  - [运行时, 日志, roslaunch 打印, 实际生效]
+  - [include, task_run_scripts, 没被加载, 没有被 include, 另一份]
+must_not: []
+rubric: 遵循元原则 1，要求去运行时日志确认生效值，并指出实际生效配置可能在 task_run_scripts 而非 SUPER 源码目录。

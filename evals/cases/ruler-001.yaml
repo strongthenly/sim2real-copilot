@@ -1,0 +1,11 @@
+id: ruler-001
+category: 评估方法
+layer: L6
+knowledge: [domains/KB_forest.md]
+prompt: |
+  树干覆盖率指标在同一个场景重复跑波动很大。我打算先调探索规划的参数，把覆盖率调上去。
+must_include:
+  - [尺子, 真值, 指标本身, 评估]
+  - [冻结, 人工标注, 先验证]
+must_not: []
+rubric: 遵循元原则 3（尺子先于算法），先确认指标与真值可信（双检测器并集 + 人工标注 + 冻结），再调算法。

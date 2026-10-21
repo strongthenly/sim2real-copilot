@@ -1,0 +1,12 @@
+id: param-002
+category: 参数语义
+layer: L1
+knowledge: [00_handbook.md, domains/KB_control-stack.md]
+prompt: |
+  为了让飞机别飞太高，我把探索的 box_min/max 的 z 范围收到了 0.3~3.5，结果飞机起飞后一直悬停不动，日志里出现 to visit 0。
+must_include:
+  - [box, 边界]
+  - [假前沿, 前沿, frontier]
+  - [goal_z, candidate_z, 限位, arbiter]
+must_not: []
+rubric: 区分 box（边界，需宽松）与 candidate_z / goal_z（限位），说明收紧 box 导致假前沿；正确做法是放宽 box、在限位层控制高度。

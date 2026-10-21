@@ -1,0 +1,11 @@
+id: diag-004
+category: 故障诊断
+layer: L1
+knowledge: [domains/KB_control-stack.md, faults/F-0004-qgc-stop-button-noop.md]
+prompt: |
+  QGC 上的自定义"停止"按钮按了没反应，后台进程还在跑。按钮绑定的命令是一串用 && 连起来的停止命令，第一条是 rosnode kill。可能是什么原因？
+must_include:
+  - ["&&", 短路]
+  - [";", 分号]
+must_not: []
+rubric: 指出 && 在前一环失败时短路，应改为 ;；加分项：指出 pkill -f 自匹配问题。
